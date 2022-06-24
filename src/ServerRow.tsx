@@ -22,6 +22,8 @@ interface RawData {
   load: number;
   'network_rx': number;
   'network_tx': number;
+  'network_in': number;
+  'network_out': number;
   cpu: number;
   memory_total: number;
   memory_used: number;
@@ -42,6 +44,25 @@ function onlineTag(online: boolean, label: string): React.ReactElement {
   return online ? <Tag color="#87d068">O N</Tag> : <Tag color="#f50">OFF</Tag>;
 }
 
+function progressColorStart(percent: number): string {
+  percent = percent || 0;
+  if (percent < 70) {
+    return `#108ee9`;
+  } if (percent < 90) {
+    return `gold-inverse`;
+  }
+  return `#f50`;
+}
+function progressColorEnd(percent: number): string {
+  percent = percent || 0;
+  if (percent < 70) {
+    return `#87d068`;
+  } if (percent < 90) {
+    return `gold-inverse`;
+  }
+  return `#f50`;
+}
+
 function transUptime(uptime: string): string {
   uptime = uptime || '';
   return uptime.replace(/days|day/, intl.get('DAYS'));
@@ -49,12 +70,13 @@ function transUptime(uptime: string): string {
 
 function networkUnit(network: number): string {
   network = network || 0;
-  if (network < 1000) {
+  if (network < 1024) {
     return `${network.toFixed(0)}B`;
-  } if (network < 1000 * 1000) {
-    return `${(network / 1000).toFixed(0)}K`;
-  }
-  return `${(network / 1000 / 1000).toFixed(0)}M`;
+  } if (network < 1024 * 1024) {
+    return `${(network / 1024).toFixed(0)}K`;
+  } if (network < 1024 * 1024 * 1024)
+    return `${(network / 1024 / 1024).toFixed(0)}M`;
+  return `${(network / 1024 / 1024 /1024).toFixed(0)}G`;
 }
 
 function bytesToSize(bytes: number, precision: number = 1, si: number = 0) {
@@ -135,13 +157,14 @@ const ServerRow: React.FC<SergateData> = (props: SergateData) => {
     <div className="sergate">
       <Row className="sr-head" justify="space-around" gutter={10}>
         <Col xs={3} sm={3} md={1} lg={1}>IPv4</Col>
-        <Col xs={0} sm={0} md={1} lg={1}>IPv6</Col>
+        <Col xs={0} sm={0} md={0} lg={1}>IPv6</Col>
         <Col xs={5} sm={4} md={2} lg={2}>{intl.get('NAME')}</Col>
         <Col xs={0} sm={2} md={2} lg={2}>{intl.get('TYPE')}</Col>
         <Col xs={2} sm={2} md={1} lg={1}>{intl.get('LOC')}</Col>
         <Col xs={4} sm={4} md={3} lg={2}>{intl.get('UPTIME')}</Col>
         <Col xs={0} sm={0} md={0} lg={1}>{intl.get('LOAD')}</Col>
-        <Col xs={0} sm={0} md={5} lg={4}>{intl.get('NETWORK')}</Col>
+        <Col xs={0} sm={0} md={4} lg={3}>{intl.get('NETWORK')}</Col>
+        <Col xs={0} sm={0} md={4} lg={3}>{intl.get('TRAFFIC')}</Col>
         <Col xs={3} sm={3} md={3} lg={3}>{intl.get('CPU')}</Col>
         <Col xs={3} sm={3} md={3} lg={3}>{intl.get('RAM')}</Col>
         <Col xs={4} sm={3} md={3} lg={3}>{intl.get('HDD')}</Col>
@@ -156,22 +179,27 @@ const ServerRow: React.FC<SergateData> = (props: SergateData) => {
           <Col xs={2} sm={2} md={1} lg={1}><Flag loc={server.location} /></Col>
           <Col xs={4} sm={4} md={3} lg={2}>{transUptime(server.uptime)}</Col>
           <Col xs={0} sm={0} md={0} lg={1}>{server.load}</Col>
-          <Col xs={0} sm={0} md={5} lg={4}>
+          <Col xs={0} sm={0} md={4} lg={3}>
             {networkUnit(server.network_rx)}
             ↓ | ↑
             {networkUnit(server.network_tx)}
           </Col>
+          <Col xs={0} sm={0} md={4} lg={3}>
+            {networkUnit(server.network_in)}
+            ↓ | ↑
+            {networkUnit(server.network_out)}
+          </Col>
           <Col xs={3} sm={3} md={3} lg={3}>
-            <Progress className="sg-progress" strokeWidth={12} percent={server.cpu} strokeColor={{'0%': '#108ee9','100%': '#87d068',}} />
+            <Progress className="sg-progress" strokeWidth={12} percent={server.cpu} strokeColor={{'0%': progressColorStart(server.cpu),'100%': progressColorEnd(server.cpu),}} />
           </Col>
           <Col xs={3} sm={3} md={3} lg={3}>
             <Tooltip placement="left" title={memTips(server)}>
-              <Progress className="sg-progress" strokeWidth={12} percent={parseFloat(((server.memory_used / server.memory_total) * 100).toFixed(1))} strokeColor={{'0%': '#108ee9','100%': '#87d068',}} />
+              <Progress className="sg-progress" strokeWidth={12} percent={parseFloat(((server.memory_used / server.memory_total) * 100).toFixed(1))} strokeColor={{'0%': progressColorStart(parseFloat(((server.memory_used / server.memory_total) * 100).toFixed(1))),'100%': progressColorEnd(parseFloat(((server.memory_used / server.memory_total) * 100).toFixed(1))),}} />
             </Tooltip>
           </Col>
           <Col xs={4} sm={3} md={3} lg={3}>
             <Tooltip placement="left" title={`${bytesToSize(server.hdd_used * 1024)}/${bytesToSize(server.hdd_total * 1024)}`}>
-              <Progress className="sg-progress" strokeWidth={12} percent={parseFloat(((server.hdd_used / server.hdd_total) * 100).toFixed(1))} strokeColor={{'0%': '#108ee9','100%': '#87d068',}}/>
+              <Progress className="sg-progress" strokeWidth={12} percent={parseFloat(((server.hdd_used / server.hdd_total) * 100).toFixed(1))} strokeColor={{'0%': progressColorStart(parseFloat(((server.hdd_used / server.hdd_total) * 100).toFixed(1))),'100%': progressColorEnd(parseFloat(((server.hdd_used / server.hdd_total) * 100).toFixed(1))),}}/>
             </Tooltip>
           </Col>
         </Row>
