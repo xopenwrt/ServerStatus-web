@@ -6,10 +6,10 @@ import React, { ReactNode } from 'react';
 import {
   Row, Col, Progress, Tooltip, Alert, Tag,
 } from 'antd';
-import {
-  CheckCircleFilled,
-  WarningFilled
-} from '@ant-design/icons';
+// import {
+//   CheckCircleFilled,
+//   WarningFilled
+// } from '@ant-design/icons';
 
 interface RawData {
   name: string;

@@ -8,8 +8,8 @@ import ServerRow from "./ServerRow";
 require("intl/locale-data/jsonp/en.js");
 require("intl/locale-data/jsonp/zh.js");
 
-const { Header, Footer, Content } = Layout;
-
+// const { Header, Footer, Content } = Layout;
+const { Header, Content } = Layout;
 const App: React.FC = () => {
   const [serverData, setServerData] = useState({ servers: [], updated: "0" });
   const [isOnline, setIsOnline] = useState(false);
