@@ -190,16 +190,16 @@ const ServerRow: React.FC<SergateData> = (props: SergateData) => {
             {networkUnit(server.network_out)}
           </Col>
           <Col xs={3} sm={3} md={3} lg={3}>
-            <Progress className="sg-progress" strokeWidth={12} percent={server.cpu} strokeColor={{'0%': progressColorStart(server.cpu),'100%': progressColorEnd(server.cpu),}} />
+            <Progress className="sg-progress" status='normal' strokeWidth={12} percent={server.cpu} strokeColor={{'0%': progressColorStart(server.cpu),'100%': progressColorEnd(server.cpu),}} />
           </Col>
           <Col xs={3} sm={3} md={3} lg={3}>
             <Tooltip placement="left" title={memTips(server)}>
-              <Progress className="sg-progress" strokeWidth={12} percent={parseFloat(((server.memory_used / server.memory_total) * 100).toFixed(1))} strokeColor={{'0%': progressColorStart(parseFloat(((server.memory_used / server.memory_total) * 100).toFixed(1))),'100%': progressColorEnd(parseFloat(((server.memory_used / server.memory_total) * 100).toFixed(1))),}} />
+              <Progress className="sg-progress" status='normal' strokeWidth={12} percent={parseFloat(((server.memory_used / server.memory_total) * 100).toFixed(1))} strokeColor={{'0%': progressColorStart(parseFloat(((server.memory_used / server.memory_total) * 100).toFixed(1))),'100%': progressColorEnd(parseFloat(((server.memory_used / server.memory_total) * 100).toFixed(1))),}} />
             </Tooltip>
           </Col>
           <Col xs={4} sm={3} md={3} lg={3}>
             <Tooltip placement="left" title={`${bytesToSize(server.hdd_used * 1024)}/${bytesToSize(server.hdd_total * 1024)}`}>
-              <Progress className="sg-progress" strokeWidth={12} percent={parseFloat(((server.hdd_used / server.hdd_total) * 100).toFixed(1))} strokeColor={{'0%': progressColorStart(parseFloat(((server.hdd_used / server.hdd_total) * 100).toFixed(1))),'100%': progressColorEnd(parseFloat(((server.hdd_used / server.hdd_total) * 100).toFixed(1))),}}/>
+              <Progress className="sg-progress" status='normal' strokeWidth={12} percent={parseFloat(((server.hdd_used / server.hdd_total) * 100).toFixed(1))} strokeColor={{'0%': progressColorStart(parseFloat(((server.hdd_used / server.hdd_total) * 100).toFixed(1))),'100%': progressColorEnd(parseFloat(((server.hdd_used / server.hdd_total) * 100).toFixed(1))),}}/>
             </Tooltip>
           </Col>
         </Row>
