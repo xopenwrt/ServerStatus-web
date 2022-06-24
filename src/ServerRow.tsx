@@ -160,7 +160,7 @@ const ServerRow: React.FC<SergateData> = (props: SergateData) => {
         <Col xs={0} sm={0} md={0} lg={1}>IPv6</Col>
         <Col xs={5} sm={4} md={2} lg={2}>{intl.get('NAME')}</Col>
         <Col xs={0} sm={2} md={2} lg={2}>{intl.get('TYPE')}</Col>
-        <Col xs={2} sm={2} md={1} lg={1}>{intl.get('LOC')}</Col>
+        <Col xs={3} sm={3} md={1} lg={1}>{intl.get('LOC')}</Col>
         <Col xs={4} sm={4} md={3} lg={2}>{intl.get('UPTIME')}</Col>
         <Col xs={0} sm={0} md={0} lg={1}>{intl.get('LOAD')}</Col>
         <Col xs={0} sm={0} md={4} lg={3}>{intl.get('NETWORK')}</Col>
@@ -176,7 +176,7 @@ const ServerRow: React.FC<SergateData> = (props: SergateData) => {
           <Col xs={0} sm={0} md={0} lg={1}>{onlineTag(server.online6, 'IPv6')}</Col>
           <Col xs={5} sm={4} md={2} lg={2}>{server.host || server.name}</Col>
           <Col xs={0} sm={2} md={2} lg={2}>{server.type}</Col>
-          <Col xs={2} sm={2} md={1} lg={1}><Flag loc={server.location} /></Col>
+          <Col xs={3} sm={3} md={1} lg={1}><Flag loc={server.location} /></Col>
           <Col xs={4} sm={4} md={3} lg={2}>{transUptime(server.uptime)}</Col>
           <Col xs={0} sm={0} md={0} lg={1}>{server.load}</Col>
           <Col xs={0} sm={0} md={4} lg={3}>
