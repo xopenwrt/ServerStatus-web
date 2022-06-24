@@ -76,7 +76,7 @@ const App: React.FC = () => {
         </Content>
         {/* <Footer className="footer">
           <a
-            href="https://github.com/krwu/ServerStatus-web"
+            href="https://github.com/xopenwrt/ServerStatus-web"
             rel="external noopener"
           >
             WebUI
