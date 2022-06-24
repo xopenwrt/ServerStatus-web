@@ -81,6 +81,7 @@ body {
   }
   .sr-head {
     font-weight: 700;
+    font-size: 0.8rem;
   }
   .sr-body .ant-col {
     font-size: 0.8rem;
@@ -100,5 +101,6 @@ body {
 
   .sr-head {
     font-weight: 700;
+    font-size: 12px;
   }
 }
