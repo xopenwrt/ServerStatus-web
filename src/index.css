@@ -21,6 +21,7 @@ body {
 .sr-head {
   padding-top: 8px;
   padding-bottom: 8px;
+  font-weight: 700;
 }
 .sr-head .ant-col {
   text-align: center;
@@ -79,7 +80,7 @@ body {
     text-align: center;
   }
   .sr-head {
-    font-size: 0.8rem;
+    font-weight: 700;
   }
   .sr-body .ant-col {
     font-size: 0.8rem;
@@ -98,6 +99,6 @@ body {
   }
 
   .sr-head {
-    font-size: 12px;
+    font-weight: 700;
   }
 }

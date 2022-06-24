@@ -49,7 +49,7 @@ function progressColorStart(percent: number): string {
   if (percent < 70) {
     return `#108ee9`;
   } if (percent < 90) {
-    return `gold-inverse`;
+    return `#faad14`;
   }
   return `#f50`;
 }
@@ -58,7 +58,7 @@ function progressColorEnd(percent: number): string {
   if (percent < 70) {
     return `#87d068`;
   } if (percent < 90) {
-    return `gold-inverse`;
+    return `#faad14`;
   }
   return `#f50`;
 }
