@@ -49,9 +49,9 @@ function progressColorStart(percent: number): string {
   if (percent < 70) {
     return `#108ee9`;
   } if (percent < 90) {
-    return `#faad14`;
+    return `#87d068`;
   }
-  return `#f50`;
+  return `#faad14`;
 }
 function progressColorEnd(percent: number): string {
   percent = percent || 0;
